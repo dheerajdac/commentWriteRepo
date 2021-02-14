@@ -1,0 +1,28 @@
+server:
+  port: 9032
+spring:
+  application:
+    name: commentWriteRepo
+  data:
+      cassandra:
+        local-datacenter: datacenter1
+        schema-action: CREATE_IF_NOT_EXISTS
+        keyspace-name: uts
+        contact-points: cass1
+        port: 9042
+
+  kafka:
+    consumer:
+      bootstrap-servers: kafka:9092
+      group-id: comment
+      auto-offset-reset: earliest
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            type:
+              mapping: comment:com.dheeraj.commentWriteRepo.model.Comment
+            trusted:
+              packages: com.dheeraj.commentWriteRepo.model 
+      
+    
