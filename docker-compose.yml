@@ -1,0 +1,25 @@
+version: '3.5'
+
+services:
+  comment-write-repo:
+    build: 
+      context: .
+      dockerfile: docker/Dockerfile
+      args:
+        # On Linux, you may need to update USER_UID and USER_GID below if not your local UID is not 1000.
+        #USER_UID: 1000
+        #USER_GID: 1000
+        TEST: 1000
+    container_name: comment-write-repo
+    environment:
+      - PROFILE=production
+    networks:
+      - cassandra
+      - kafka
+networks:
+  cassandra :
+    external:
+      name: cassandra
+  kafka :
+    external:
+      name: kafka
