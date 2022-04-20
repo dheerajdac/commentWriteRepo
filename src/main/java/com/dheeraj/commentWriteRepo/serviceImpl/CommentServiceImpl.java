@@ -1,6 +1,7 @@
 package com.dheeraj.commentWriteRepo.serviceImpl;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.Calendar;
 
 import com.datastax.oss.driver.api.core.uuid.Uuids;
 import com.dheeraj.commentWriteRepo.model.Comment;
@@ -19,7 +20,7 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public void insertComment(Comment comment) {
         comment.setId(Uuids.timeBased().toString());
-        comment.setCreatedOn(new Date());
+        comment.setCreatedOn(LocalDateTime.now());
         if(comment.getParentId() != null && !comment.getParentId().isEmpty()) {
             this.op.insert(comment);
         }
@@ -27,7 +28,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public void updateComment(Comment comment) {
-        comment.setLastModified(new Date());
+        comment.setLastModified(LocalDateTime.now());
         comment.setEdited(true);
         this.op.update(comment);
     }

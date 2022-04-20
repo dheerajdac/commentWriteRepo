@@ -1,5 +1,5 @@
 server:
-  port: 9032
+  port: 9996
 spring:
   application:
     name: commentWriteRepo
@@ -7,8 +7,8 @@ spring:
       cassandra:
         local-datacenter: datacenter1
         schema-action: CREATE_IF_NOT_EXISTS
-        keyspace-name: uts
-        contact-points: cass1
+        keyspace-name: comment
+        contact-points: cassandra
         port: 9042
 
   kafka:
